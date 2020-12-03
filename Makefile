@@ -7,250 +7,215 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=v2ray-core
-PKG_VERSION:=4.33.0
+PKG_NAME:=xray-core
+PKG_VERSION:=1.0.0
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://codeload.github.com/v2fly/v2ray-core/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=ce456df0a798e1ed76ec014cb619e89c508bfb812c689260067575ee94e18c76
+PKG_SOURCE_NAME=Xray-core
+PKG_SOURCE:=$(PKG_SOURCE_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://codeload.github.com/XTLS/Xray-core/tar.gz/v$(PKG_VERSION)?
+PKG_HASH:=9f0e8f7a885f082780419ac7211a6e6150529d58fa5317ae4dfb61d3a7ba218c
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_SOURCE_NAME)-$(PKG_VERSION)
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
-PKG_MAINTAINER:=Xingwang Liao <kuoruan@gmail.com>
+PKG_MAINTAINER:=Zhonghua Mo <mozhonghu@yeah.net>
 
-PKG_BUILD_DEPENDS:=golang/host PACKAGE_v2ray-core-mini:upx/host
+PKG_BUILD_DEPENDS:=golang/host PACKAGE_xray-core-mini:upx/host
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
 
 PKG_CONFIG_DEPENDS:= \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_json_v2ctl \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_json_internal \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_json_none \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_exclude_v2ctl \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_exclude_assets \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_compress_upx \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_custom_features \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_dns \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_log \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_tls \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_udp \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_policy \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_reverse \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_routing \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_statistics \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_blackhole_proto \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_dns_proxy \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_dokodemo_proto \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_freedom_proto \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_mtproto_proxy \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_http_proto \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_shadowsocks_proto \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_socks_proto \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_vmess_proto \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_tcp_trans \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_mkcp_trans \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_websocket_trans \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_http2_trans \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_domain_socket_trans \
-	CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_quic_trans
+	CONFIG_PACKAGE_xray_include_geo_data \
+	CONFIG_PACKAGE_xray_compress_upx \
+	CONFIG_PACKAGE_xray_custom_features \
+	CONFIG_PACKAGE_xray_without_dns \
+	CONFIG_PACKAGE_xray_without_log \
+	CONFIG_PACKAGE_xray_without_tls \
+	CONFIG_PACKAGE_xray_without_udp \
+	CONFIG_PACKAGE_xray_without_policy \
+	CONFIG_PACKAGE_xray_without_reverse \
+	CONFIG_PACKAGE_xray_without_routing \
+	CONFIG_PACKAGE_xray_without_statistics \
+	CONFIG_PACKAGE_xray_without_blackhole_proto \
+	CONFIG_PACKAGE_xray_without_dns_proxy \
+	CONFIG_PACKAGE_xray_without_dokodemo_proto \
+	CONFIG_PACKAGE_xray_without_freedom_proto \
+	CONFIG_PACKAGE_xray_without_mtproto_proxy \
+	CONFIG_PACKAGE_xray_without_http_proto \
+	CONFIG_PACKAGE_xray_without_shadowsocks_proto \
+	CONFIG_PACKAGE_xray_without_socks_proto \
+	CONFIG_PACKAGE_xray_without_vmess_proto \
+	CONFIG_PACKAGE_xray_without_tcp_trans \
+	CONFIG_PACKAGE_xray_without_mkcp_trans \
+	CONFIG_PACKAGE_xray_without_websocket_trans \
+	CONFIG_PACKAGE_xray_without_http2_trans \
+	CONFIG_PACKAGE_xray_without_domain_socket_trans \
+	CONFIG_PACKAGE_xray_without_quic_trans
 
-GO_PKG:=v2ray.com/core
+GO_PKG:=github.com/xtls/xray-core/v1
 GO_PKG_LDFLAGS:=-s -w
-GO_PKG_LDFLAGS_X:= \
-	v2ray.com/core.version=$(PKG_VERSION) \
-	v2ray.com/core.build=R$(PKG_RELEASE) \
-	v2ray.com/core.codename=OpenWrt
 
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
 
-define Package/v2ray-core/Default
+define Package/xray-core
   TITLE:=A platform for building proxies to bypass network restrictions.
-  URL:=https://www.v2fly.org
+  URL:=https://github.com/XTLS
   SECTION:=net
   CATEGORY:=Network
-  SUBMENU:=Project V
+  SUBMENU:=Project X
   DEPENDS:=$(GO_ARCH_DEPENDS) +ca-certificates
+  PROVIDES:=xray
 endef
 
-define Package/v2ray-core/Default/description
-  Project V is a set of network tools that help you to build your own computer network.
-  It secures your network connections and thus protects your privacy.
+define Package/xray-core/description
+  Project X originates from XTLS protocol, provides a set of network tools such as Xray-core and Xray-flutter.
+
+  This package contains xray, geoip.dat and geosite.dat.
 endef
 
-define Package/v2ray-core
-$(call Package/v2ray-core/Default)
-  TITLE+= (Full)
-  VARIANT:=full
-  DEFAULT_VARIANT:=1
-  PROVIDES:=v2ray
+define Package/xray-core/config
+	source "$(SOURCE)/Config.in"
 endef
 
-define Package/v2ray-core/description
-$(call Package/v2ray-core/Default/description)
-  This package contains v2ray, v2ctl, geoip.dat and geosite.dat.
+define Package/knxd/conffiles
+/etc/xray/config.json
 endef
 
-define Package/v2ray-core-mini
-$(call Package/v2ray-core/Default)
-  TITLE+= (Minimal)
-  VARIANT:=mini
-  PROVIDES:=v2ray
-endef
+XRAY_SED_ARGS:=
 
-define Package/v2ray-core-mini/description
-$(call Package/v2ray-core/Default/description)
-  This package contains only v2ray.
-endef
+ifeq ($(CONFIG_PACKAGE_xray_custom_features),y)
 
-define Package/v2ray-core-mini/config
-	source "$(SOURCE)/Config-mini.in"
-endef
-
-V2RAY_SED_ARGS:=
-
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_json_internal),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/main/json",// &,; \
-	s,// \(_ "v2ray.com/core/main/jsonem"\),\1,;
-else ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_json_none),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/main/json",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_dns),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/app/dns",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_custom_features),y)
-
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_dns),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/app/dns",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_log),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/app/log",// &,; \
+	s,_ "github.com/xtls/xray-core/v1/app/log/command",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_log),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/app/log",// &,; \
-	s,_ "v2ray.com/core/app/log/command",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_tls),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/tls",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_tls),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/transport/internet/tls",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_udp),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/udp",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_udp),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/transport/internet/udp",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_policy),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/app/policy",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_policy),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/app/policy",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_reverse),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/app/reverse",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_reverse),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/app/reverse",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_routing),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/app/router",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_routing),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/app/router",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_statistics),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/app/stats",// &,; \
+	s,_ "github.com/xtls/xray-core/v1/app/stats/command",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_statistics),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/app/stats",// &,; \
-	s,_ "v2ray.com/core/app/stats/command",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_blackhole_proto),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/proxy/blackhole",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_blackhole_proto),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/proxy/blackhole",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_dns_proxy),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/proxy/dns",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_dns_proxy),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/proxy/dns",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_dokodemo_proto),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/proxy/dokodemo",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_dokodemo_proto),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/proxy/dokodemo",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_freedom_proto),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/proxy/freedom",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_freedom_proto),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/proxy/freedom",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_mtproto_proxy),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/proxy/mtproto",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_mtproto_proxy),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/proxy/mtproto",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_http_proto),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/proxy/http",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_http_proto),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/proxy/http",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_shadowsocks_proto),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/proxy/shadowsocks",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_shadowsocks_proto),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/proxy/shadowsocks",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_socks_proto),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/proxy/socks",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_socks_proto),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/proxy/socks",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_vmess_proto),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/proxy/vmess/inbound",// &,; \
+	s,_ "github.com/xtls/xray-core/v1/proxy/vmess/outbound",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_vmess_proto),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/proxy/vmess/inbound",// &,; \
-	s,_ "v2ray.com/core/proxy/vmess/outbound",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_tcp_trans),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/tcp",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_tcp_trans),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/transport/internet/tcp",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_mkcp_trans),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/kcp",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_mkcp_trans),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/transport/internet/kcp",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_websocket_trans),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/websocket",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_websocket_trans),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/transport/internet/websocket",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_http2_trans),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/http",// &,; \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/http",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_http2_trans),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/transport/internet/http",// &,; \
-	s,_ "v2ray.com/core/transport/internet/headers/http",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_domain_socket_trans),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/domainsocket",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_domain_socket_trans),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/transport/internet/domainsocket",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_quic_trans),y)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/quic",// &,;
 endif
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_quic_trans),y)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/transport/internet/quic",// &,;
+ifeq ($(CONFIG_PACKAGE_xray_without_mkcp_trans)$(CONFIG_PACKAGE_xray_without_quic_trans),yy)
+XRAY_SED_ARGS += \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/noop",// &,; \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/srtp",// &,; \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/tls",// &,; \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/utp",// &,; \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/wechat",// &,; \
+	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/wireguard",// &,;
 endif
-
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_mkcp_trans)$(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_without_quic_trans),yy)
-V2RAY_SED_ARGS += \
-	s,_ "v2ray.com/core/transport/internet/headers/noop",// &,; \
-	s,_ "v2ray.com/core/transport/internet/headers/srtp",// &,; \
-	s,_ "v2ray.com/core/transport/internet/headers/tls",// &,; \
-	s,_ "v2ray.com/core/transport/internet/headers/utp",// &,; \
-	s,_ "v2ray.com/core/transport/internet/headers/wechat",// &,; \
-	s,_ "v2ray.com/core/transport/internet/headers/wireguard",// &,;
 endif
-
-endif # custom features
 
 GEOIP_VER:=latest
 GEOIP_FILE:=geoip-$(GEOIP_VER).dat
@@ -275,78 +240,54 @@ endef
 define Build/Prepare
 	$(call Build/Prepare/Default)
 
-ifneq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_exclude_assets),y)
+ifeq ($(CONFIG_PACKAGE_xray_include_geo_data),y)
+	$(eval $(call Download,geoip.dat))
+	$(eval $(call Download,geosite.dat))
+
 	# move file to make sure download new file every build
-	mv -f $(DL_DIR)/$(GEOIP_FILE) $(PKG_BUILD_DIR)/release/config/geoip.dat
-	mv -f $(DL_DIR)/$(GEOSITE_FILE) $(PKG_BUILD_DIR)/release/config/geosite.dat
+	mv -f $(DL_DIR)/$(GEOIP_FILE) $(PKG_BUILD_DIR)/geoip.dat
+	mv -f $(DL_DIR)/$(GEOSITE_FILE) $(PKG_BUILD_DIR)/geosite.dat
 endif
 
-ifneq ($(V2RAY_SED_ARGS),)
+ifneq ($(XRAY_SED_ARGS),)
 	( \
 		$(SED) \
-			'$(V2RAY_SED_ARGS)' \
+			'$(XRAY_SED_ARGS)' \
 			$(PKG_BUILD_DIR)/main/distro/all/all.go ; \
 	)
 endif
 endef
 
 define Build/Compile
-	$(eval GO_PKG_BUILD_PKG:=v2ray.com/core/main)
+	$(eval GO_PKG_BUILD_PKG:=github.com/xtls/xray-core/v1/main)
 	$(call GoPackage/Build/Compile)
-	mv -f $(GO_PKG_BUILD_BIN_DIR)/main $(GO_PKG_BUILD_BIN_DIR)/v2ray
+	mv -f $(GO_PKG_BUILD_BIN_DIR)/main $(GO_PKG_BUILD_BIN_DIR)/xray
 
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_compress_upx),y)
-	$(STAGING_DIR_HOST)/bin/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/v2ray || true
+ifeq ($(CONFIG_PACKAGE_xray_compress_upx),y)
+	$(STAGING_DIR_HOST)/bin/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/xray || true
 endif
 
-ifneq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_exclude_v2ctl),y)
-	$(eval GO_PKG_BUILD_PKG:=v2ray.com/core/infra/control/main)
-	$(call GoPackage/Build/Compile)
-	mv -f $(GO_PKG_BUILD_BIN_DIR)/main $(GO_PKG_BUILD_BIN_DIR)/v2ctl
-
-ifeq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_compress_upx),y)
-	$(STAGING_DIR_HOST)/bin/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/v2ctl || true
-endif
-endif
 endef
 
-define Package/v2ray-core/install
+define Package/xray-core/install
 	$(call GoPackage/Package/Install/Bin,$(PKG_INSTALL_DIR))
 
 	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/xray $(1)/usr/bin
 
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/v2ray $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/v2ctl $(1)/usr/bin
+	$(INSTALL_DIR) $(1)/etc/xray/
+	$(INSTALL_DATA) ./files/config.json $(1)/etc/xray
 
+	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_BIN) ./files/xray.init $(1)/etc/init.d/xray
+
+ifeq ($(CONFIG_PACKAGE_xray_include_geo_data),y)
+	$(INSTALL_DIR) $(1)/usr/share/xray
 	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/release/config/{geoip,geosite}.dat \
-		$(1)/usr/bin
-endef
-
-define Package/v2ray-core-mini/install
-	$(call GoPackage/Package/Install/Bin,$(PKG_INSTALL_DIR))
-
-	$(INSTALL_DIR) $(1)/usr/bin
-
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/v2ray $(1)/usr/bin
-
-ifneq ($(CONFIG_PACKAGE_v2ray_mini_exclude_v2ctl),y)
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/v2ctl $(1)/usr/bin
-endif
-
-ifneq ($(CONFIG_PACKAGE_v2ray_mini_exclude_assets),y)
-	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/release/config/{geoip,geosite}.dat \
-		$(1)/usr/bin
+		$(PKG_BUILD_DIR)/{geoip,geosite}.dat \
+		$(1)/usr/share/xray
 endif
 endef
 
-ifneq ($(CONFIG_PACKAGE_v2ray_$(BUILD_VARIANT)_exclude_assets),y)
-$(eval $(call Download,geoip.dat))
-$(eval $(call Download,geosite.dat))
-endif
-
-$(eval $(call GoBinPackage,v2ray-core))
-$(eval $(call BuildPackage,v2ray-core))
-$(eval $(call GoBinPackage,v2ray-core-mini))
-$(eval $(call BuildPackage,v2ray-core-mini))
+$(eval $(call GoBinPackage,xray-core))
+$(eval $(call BuildPackage,xray-core))
