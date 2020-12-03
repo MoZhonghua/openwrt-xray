@@ -79,10 +79,6 @@ define Package/xray-core/config
 	source "$(SOURCE)/Config.in"
 endef
 
-define Package/knxd/conffiles
-/etc/xray/config.json
-endef
-
 XRAY_SED_ARGS:=
 
 ifeq ($(CONFIG_PACKAGE_xray_custom_features),y)
@@ -276,7 +272,6 @@ define Package/xray-core/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/xray $(1)/usr/bin
 
 	$(INSTALL_DIR) $(1)/etc/xray/
-	$(INSTALL_DATA) ./files/config.json $(1)/etc/xray
 
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/xray.init $(1)/etc/init.d/xray
