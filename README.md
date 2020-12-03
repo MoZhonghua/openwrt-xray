@@ -27,7 +27,7 @@ Network ---> Project X ---> <*> xray-core
 make package/xray-core/{clean,compile} V=s
 ```
 
-- You can custom the features in `Xray Mini Configuration` option.
+- You can custom the features in `XRAY Configuration` option.
 
 3. UPX Compress
 
