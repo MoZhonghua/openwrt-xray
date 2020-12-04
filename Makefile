@@ -272,6 +272,9 @@ define Package/xray-core/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/xray $(1)/usr/bin
 
 	$(INSTALL_DIR) $(1)/etc/xray/
+	$(INSTALL_DATA) ./files/config.json.example $(1)/etc/xray
+	$(INSTALL_DATA) ./files/vpoint_socks_vmess.json $(1)/etc/xray
+	$(INSTALL_DATA) ./files/vpoint_vmess_freedom.json $(1)/etc/xray
 
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/xray.init $(1)/etc/init.d/xray
