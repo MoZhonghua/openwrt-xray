@@ -266,8 +266,6 @@ endif
 endef
 
 define Package/xray-core/install
-	$(call GoPackage/Package/Install/Bin,$(PKG_INSTALL_DIR))
-
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/xray $(1)/usr/bin
 
@@ -287,5 +285,4 @@ ifeq ($(CONFIG_PACKAGE_xray_include_geo_data),y)
 endif
 endef
 
-$(eval $(call GoBinPackage,xray-core))
 $(eval $(call BuildPackage,xray-core))
