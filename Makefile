@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=xray-core
-PKG_VERSION:=1.0.0
+PKG_VERSION:=1.1.2
 PKG_RELEASE:=1
 
 PKG_SOURCE_NAME=Xray-core
 PKG_SOURCE:=$(PKG_SOURCE_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/XTLS/Xray-core/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=9f0e8f7a885f082780419ac7211a6e6150529d58fa5317ae4dfb61d3a7ba218c
+PKG_HASH:=6ec14856fe9966a118fc0854696ec54c08ce478cb937a75fae74072c945dcb42
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_SOURCE_NAME)-$(PKG_VERSION)
 
 PKG_LICENSE:=MIT
@@ -53,7 +53,7 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_PACKAGE_xray_without_domain_socket_trans \
 	CONFIG_PACKAGE_xray_without_quic_trans
 
-GO_PKG:=github.com/xtls/xray-core/v1
+GO_PKG:=github.com/xtls/xray-core
 GO_PKG_LDFLAGS:=-s -w
 
 include $(INCLUDE_DIR)/package.mk
@@ -85,131 +85,131 @@ ifeq ($(CONFIG_PACKAGE_xray_custom_features),y)
 
 ifeq ($(CONFIG_PACKAGE_xray_without_dns),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/app/dns",// &,;
+	s,_ "github.com/xtls/xray-core/app/dns",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_log),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/app/log",// &,; \
-	s,_ "github.com/xtls/xray-core/v1/app/log/command",// &,;
+	s,_ "github.com/xtls/xray-core/app/log",// &,; \
+	s,_ "github.com/xtls/xray-core/app/log/command",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_tls),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/tls",// &,;
+	s,_ "github.com/xtls/xray-core/transport/internet/tls",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_udp),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/udp",// &,;
+	s,_ "github.com/xtls/xray-core/transport/internet/udp",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_policy),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/app/policy",// &,;
+	s,_ "github.com/xtls/xray-core/app/policy",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_reverse),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/app/reverse",// &,;
+	s,_ "github.com/xtls/xray-core/app/reverse",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_routing),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/app/router",// &,;
+	s,_ "github.com/xtls/xray-core/app/router",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_statistics),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/app/stats",// &,; \
-	s,_ "github.com/xtls/xray-core/v1/app/stats/command",// &,;
+	s,_ "github.com/xtls/xray-core/app/stats",// &,; \
+	s,_ "github.com/xtls/xray-core/app/stats/command",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_blackhole_proto),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/proxy/blackhole",// &,;
+	s,_ "github.com/xtls/xray-core/proxy/blackhole",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_dns_proxy),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/proxy/dns",// &,;
+	s,_ "github.com/xtls/xray-core/proxy/dns",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_dokodemo_proto),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/proxy/dokodemo",// &,;
+	s,_ "github.com/xtls/xray-core/proxy/dokodemo",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_freedom_proto),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/proxy/freedom",// &,;
+	s,_ "github.com/xtls/xray-core/proxy/freedom",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_mtproto_proxy),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/proxy/mtproto",// &,;
+	s,_ "github.com/xtls/xray-core/proxy/mtproto",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_http_proto),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/proxy/http",// &,;
+	s,_ "github.com/xtls/xray-core/proxy/http",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_shadowsocks_proto),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/proxy/shadowsocks",// &,;
+	s,_ "github.com/xtls/xray-core/proxy/shadowsocks",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_socks_proto),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/proxy/socks",// &,;
+	s,_ "github.com/xtls/xray-core/proxy/socks",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_vmess_proto),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/proxy/vmess/inbound",// &,; \
-	s,_ "github.com/xtls/xray-core/v1/proxy/vmess/outbound",// &,;
+	s,_ "github.com/xtls/xray-core/proxy/vmess/inbound",// &,; \
+	s,_ "github.com/xtls/xray-core/proxy/vmess/outbound",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_tcp_trans),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/tcp",// &,;
+	s,_ "github.com/xtls/xray-core/transport/internet/tcp",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_mkcp_trans),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/kcp",// &,;
+	s,_ "github.com/xtls/xray-core/transport/internet/kcp",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_websocket_trans),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/websocket",// &,;
+	s,_ "github.com/xtls/xray-core/transport/internet/websocket",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_http2_trans),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/http",// &,; \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/http",// &,;
+	s,_ "github.com/xtls/xray-core/transport/internet/http",// &,; \
+	s,_ "github.com/xtls/xray-core/transport/internet/headers/http",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_domain_socket_trans),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/domainsocket",// &,;
+	s,_ "github.com/xtls/xray-core/transport/internet/domainsocket",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_quic_trans),y)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/quic",// &,;
+	s,_ "github.com/xtls/xray-core/transport/internet/quic",// &,;
 endif
 
 ifeq ($(CONFIG_PACKAGE_xray_without_mkcp_trans)$(CONFIG_PACKAGE_xray_without_quic_trans),yy)
 XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/noop",// &,; \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/srtp",// &,; \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/tls",// &,; \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/utp",// &,; \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/wechat",// &,; \
-	s,_ "github.com/xtls/xray-core/v1/transport/internet/headers/wireguard",// &,;
+	s,_ "github.com/xtls/xray-core/transport/internet/headers/noop",// &,; \
+	s,_ "github.com/xtls/xray-core/transport/internet/headers/srtp",// &,; \
+	s,_ "github.com/xtls/xray-core/transport/internet/headers/tls",// &,; \
+	s,_ "github.com/xtls/xray-core/transport/internet/headers/utp",// &,; \
+	s,_ "github.com/xtls/xray-core/transport/internet/headers/wechat",// &,; \
+	s,_ "github.com/xtls/xray-core/transport/internet/headers/wireguard",// &,;
 endif
 endif
 
@@ -255,7 +255,7 @@ endif
 endef
 
 define Build/Compile
-	$(eval GO_PKG_BUILD_PKG:=github.com/xtls/xray-core/v1/main)
+	$(eval GO_PKG_BUILD_PKG:=github.com/xtls/xray-core/main)
 	$(call GoPackage/Build/Compile)
 	mv -f $(GO_PKG_BUILD_BIN_DIR)/main $(GO_PKG_BUILD_BIN_DIR)/xray
 
