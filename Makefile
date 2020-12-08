@@ -266,6 +266,8 @@ endif
 endef
 
 define Package/xray-core/install
+	$(call GoPackage/Package/Install/Bin,$(PKG_INSTALL_DIR))
+
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/xray $(1)/usr/bin
 
