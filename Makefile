@@ -54,7 +54,7 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_PACKAGE_xray_without_quic_trans
 
 GO_PKG:=github.com/xtls/xray-core
-GO_PKG_LDFLAGS:=-s -w
+GO_PKG_LDFLAGS:=-s -w -buildid=
 
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
