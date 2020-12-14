@@ -2,11 +2,11 @@ menu "XRAY Configuration"
 
 config PACKAGE_xray_include_geo_data
 	bool "Include geoip.dat & geosite.dat"
-	default y
+	default n
 
 config PACKAGE_xray_compress_upx
 	bool "Compress executable files with UPX"
-	default y
+	default n
 
 config PACKAGE_xray_custom_features
 	bool "Custom Features"
