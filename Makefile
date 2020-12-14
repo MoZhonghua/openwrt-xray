@@ -21,7 +21,8 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Zhonghua Mo <mozhonghu@yeah.net>
 
-PKG_BUILD_DEPENDS:=golang/host PACKAGE_xray-core-mini:upx/host
+PKG_BUILD_DEPENDS:=golang/host PACKAGE_xray_compress_upx:upx/host
+
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
 
