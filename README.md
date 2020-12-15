@@ -32,7 +32,7 @@ make package/xray-core/{clean,compile} V=s
 3. Upgrade golang (only required if version of golang in SDK is too old)
 
 ```sh
-sed -i "s/GO_VERSION_MAJOR_MINOR:=.*/GO_VERSION_MAJOR_MINOR:=1.15/g" feeds/packages/slang/golang/golang-version.mk
+sed -i "s/GO_VERSION_MAJOR_MINOR:=.*/GO_VERSION_MAJOR_MINOR:=1.15/g" feeds/packages/lang/golang/golang-version.mk
 sed -i "s/GO_VERSION_PATCH:=.*/GO_VERSION_PATCH:=5/g" feeds/packages/lang/golang/golang-version.mk 
 sed -i "s/PKG_HASH:=.*/PKG_HASH:=c1076b90cf94b73ebed62a81d802cd84d43d02dea8c07abdc922c57a071c84f1/g" feeds/packages/lang/golang/golang/Makefile
 ```
