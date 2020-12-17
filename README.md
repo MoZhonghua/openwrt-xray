@@ -9,7 +9,7 @@ Xray for OpenWrt
 2. Enter root directory of SDK, then download the Makefile:
 
 ```sh
-git clone -b master --depth 1 https://github.com/MoZhonghua/openwrt-xray package/xray-core
+git clone -b master --depth 1 https://github.com/MoZhonghua/openwrt-xray package/openwrt-xray
 ```
 
 > For Chinese users, `export GOPROXY=https://goproxy.io` before build.
@@ -24,7 +24,9 @@ make menuconfig
 
 Network ---> Project X ---> <*> xray-core
 
-make package/xray-core/{clean,compile} V=s
+make package/openwrt-xray/{clean,compile} V=s
+
+find ./bin -name "*.ipk" | grep xray
 ```
 
 - You can custom the features in `XRAY Configuration` option.
