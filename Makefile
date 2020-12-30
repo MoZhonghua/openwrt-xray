@@ -28,31 +28,7 @@ PKG_USE_MIPS16:=0
 
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_PACKAGE_xray_include_geo_data \
-	CONFIG_PACKAGE_xray_compress_upx \
-	CONFIG_PACKAGE_xray_custom_features \
-	CONFIG_PACKAGE_xray_without_dns \
-	CONFIG_PACKAGE_xray_without_log \
-	CONFIG_PACKAGE_xray_without_tls \
-	CONFIG_PACKAGE_xray_without_udp \
-	CONFIG_PACKAGE_xray_without_policy \
-	CONFIG_PACKAGE_xray_without_reverse \
-	CONFIG_PACKAGE_xray_without_routing \
-	CONFIG_PACKAGE_xray_without_statistics \
-	CONFIG_PACKAGE_xray_without_blackhole_proto \
-	CONFIG_PACKAGE_xray_without_dns_proxy \
-	CONFIG_PACKAGE_xray_without_dokodemo_proto \
-	CONFIG_PACKAGE_xray_without_freedom_proto \
-	CONFIG_PACKAGE_xray_without_mtproto_proxy \
-	CONFIG_PACKAGE_xray_without_http_proto \
-	CONFIG_PACKAGE_xray_without_shadowsocks_proto \
-	CONFIG_PACKAGE_xray_without_socks_proto \
-	CONFIG_PACKAGE_xray_without_vmess_proto \
-	CONFIG_PACKAGE_xray_without_tcp_trans \
-	CONFIG_PACKAGE_xray_without_mkcp_trans \
-	CONFIG_PACKAGE_xray_without_websocket_trans \
-	CONFIG_PACKAGE_xray_without_http2_trans \
-	CONFIG_PACKAGE_xray_without_domain_socket_trans \
-	CONFIG_PACKAGE_xray_without_quic_trans
+	CONFIG_PACKAGE_xray_compress_upx
 
 GO_PKG:=github.com/xtls/xray-core
 GO_PKG_LDFLAGS:=-s -w -buildid=
@@ -79,140 +55,6 @@ endef
 define Package/xray-core/config
 	source "$(SOURCE)/Config.in"
 endef
-
-XRAY_SED_ARGS:=
-
-ifeq ($(CONFIG_PACKAGE_xray_custom_features),y)
-
-ifeq ($(CONFIG_PACKAGE_xray_without_dns),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/app/dns",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_log),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/app/log",// &,; \
-	s,_ "github.com/xtls/xray-core/app/log/command",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_tls),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/transport/internet/tls",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_udp),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/transport/internet/udp",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_policy),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/app/policy",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_reverse),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/app/reverse",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_routing),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/app/router",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_statistics),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/app/stats",// &,; \
-	s,_ "github.com/xtls/xray-core/app/stats/command",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_blackhole_proto),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/proxy/blackhole",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_dns_proxy),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/proxy/dns",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_dokodemo_proto),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/proxy/dokodemo",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_freedom_proto),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/proxy/freedom",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_mtproto_proxy),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/proxy/mtproto",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_http_proto),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/proxy/http",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_shadowsocks_proto),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/proxy/shadowsocks",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_socks_proto),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/proxy/socks",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_vmess_proto),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/proxy/vmess/inbound",// &,; \
-	s,_ "github.com/xtls/xray-core/proxy/vmess/outbound",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_tcp_trans),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/transport/internet/tcp",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_mkcp_trans),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/transport/internet/kcp",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_websocket_trans),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/transport/internet/websocket",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_http2_trans),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/transport/internet/http",// &,; \
-	s,_ "github.com/xtls/xray-core/transport/internet/headers/http",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_domain_socket_trans),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/transport/internet/domainsocket",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_quic_trans),y)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/transport/internet/quic",// &,;
-endif
-
-ifeq ($(CONFIG_PACKAGE_xray_without_mkcp_trans)$(CONFIG_PACKAGE_xray_without_quic_trans),yy)
-XRAY_SED_ARGS += \
-	s,_ "github.com/xtls/xray-core/transport/internet/headers/noop",// &,; \
-	s,_ "github.com/xtls/xray-core/transport/internet/headers/srtp",// &,; \
-	s,_ "github.com/xtls/xray-core/transport/internet/headers/tls",// &,; \
-	s,_ "github.com/xtls/xray-core/transport/internet/headers/utp",// &,; \
-	s,_ "github.com/xtls/xray-core/transport/internet/headers/wechat",// &,; \
-	s,_ "github.com/xtls/xray-core/transport/internet/headers/wireguard",// &,;
-endif
-endif
 
 GEOIP_VER:=latest
 GEOIP_FILE:=geoip-$(GEOIP_VER).dat
@@ -246,13 +88,6 @@ ifeq ($(CONFIG_PACKAGE_xray_include_geo_data),y)
 	mv -f $(DL_DIR)/$(GEOSITE_FILE) $(PKG_BUILD_DIR)/geosite.dat
 endif
 
-ifneq ($(XRAY_SED_ARGS),)
-	( \
-		$(SED) \
-			'$(XRAY_SED_ARGS)' \
-			$(PKG_BUILD_DIR)/main/distro/all/all.go ; \
-	)
-endif
 endef
 
 define Build/Compile
