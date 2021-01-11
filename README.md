@@ -31,7 +31,7 @@ find ./bin -name "*.ipk" | grep xray
 
 - You can custom the features in `XRAY Configuration` option.
 
-3. UPX Compress
+## UPX Compress
 
 If you want to build with UPX compress, the UPX package is required.
 
