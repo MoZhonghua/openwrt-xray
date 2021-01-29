@@ -53,7 +53,17 @@ define Package/xray-core/description
 endef
 
 define Package/xray-core/config
-	source "$(SOURCE)/Config.in"
+menu "XRAY Configuration"
+
+config PACKAGE_xray_include_geo_data
+	bool "Include geoip.dat & geosite.dat"
+	default n
+
+config PACKAGE_xray_compress_upx
+	bool "Compress executable files with UPX"
+	default n
+
+endmenu
 endef
 
 GEOIP_VER:=latest
